@@ -1,6 +1,7 @@
 module Main where
 
 import Data.Ratio
+import qualified Data.Map.Strict as Map
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
@@ -8,7 +9,7 @@ import World
 import Input
 
 render_world :: World -> Picture
-render_world w | not $ null $ floors w = Color cyan (Circle 3.14) 
+render_world w | not $ null $ floors w = Color cyan (Circle 3.14)
     | otherwise = Blank
 
 step_world :: Float -> World -> World
