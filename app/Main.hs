@@ -21,7 +21,7 @@ main = do
     play (InWindow "Skeletons 'n Stuff" (1280, 1024) (10, 10))
       black
       10
-      (World 0 [Floor [[0, 1], [1, 0]] [] []] (Player (0, 0) 10) images)
+      (World 0 [] images "Skeletons 'n Stuff!")
       render_world
       handle_input
       step_world

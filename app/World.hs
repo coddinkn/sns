@@ -14,11 +14,8 @@ data Monster = Monster { monsterPosition :: Position
                        , monsterID :: Int
                        , monsterHealth :: Int
                        , monsterVariety :: Char
+                       , inventory :: [Item]
                        }
-
-data Player = Player { playerPosition :: Position
-                     , playerHealth :: Int
-                     }
 
 data Floor = Floor { terrainLayer :: [[Tile]]
                    , itemLayer :: [Item]
@@ -26,12 +23,12 @@ data Floor = Floor { terrainLayer :: [[Tile]]
                    }
 
 floorWidth = 80
-floorHeight = 64
+floorHeight = 63
 
-emptyTerrain = take floorHeight $ repeat $ take floorWidth $ repeat ((-1) :: Tile) 
+emptyTerrain = take floorHeight $ repeat $ take floorWidth $ repeat ((-1) :: Tile)
 
 data World = World { curFloor :: Int
                    , floors :: [Floor]
-                   , player :: Player
                    , tiles :: Map Tile Picture
+                   , curMessage :: String
                    }
