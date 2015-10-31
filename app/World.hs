@@ -1,9 +1,14 @@
 module World where
 
+import Data.Map.Strict
+import Graphics.Gloss
+
 type Position = (Int, Int)
+type Tile = Int
 
 data Item = Money {moneyPosition :: Position, moneyAmount :: Int}
-    | Food {foodPosition :: Position, foodAmount :: Int} 
+    | Food {foodPosition :: Position, foodAmount :: Int}
+    | BoneSaw {bonePosition :: Position, sawAmount :: Int}
 
 data Monster = Monster {
     monsterPosition :: Position,
@@ -18,12 +23,14 @@ data Player = Player {
 }
 
 data Floor = Floor {
-    terrainLayer :: [[Char]],
+    terrainLayer :: [[Tile]],
     itemLayer :: [Item],
     monsterLayer :: [Monster]
 }
 
 data World = World {
+    curFloor :: Int,
     floors :: [Floor],
-    player :: Player
+    player :: Player,
+    tiles :: Map Tile Picture
 }
