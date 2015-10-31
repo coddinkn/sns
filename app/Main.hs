@@ -9,19 +9,19 @@ import System.Directory
 
 import World
 import Input
-import Render
+
+render_world :: World -> Picture
+render_world w = Blank
 
 step_world :: Float -> World -> World
-step_world f w = w
+step_world _ w = w
 
 main :: IO ()
 main = do
-    pwd <- getCurrentDirectory
-    images <- load_tiles pwd
     play (InWindow "Skeletons 'n Stuff" (1280, 1024) (10, 10))
       white
       10
-      (World 0 [] (Player (0, 0) 10) images)
+      (World 0 [] (Player (0, 0) 10) mempty)
       render_world
       handle_input
       step_world

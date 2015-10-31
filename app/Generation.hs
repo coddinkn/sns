@@ -2,8 +2,23 @@ module Generation where
 
 import System.Random
 
-floorWidth = 80
-floorHeight = 64
+import World
 
-genFloor :: StdGen -> [[Char]]
-genFloor _ = take floorHeight (repeat (take floorWidth (repeat ' ')))
+genFloor :: StdGen -> IO Floor
+genFloor gen = do 
+    terrain <- genTerrain gen emptyTerrain
+    items <- genItems gen terrain
+    monsters <- genMonsters gen terrain
+    return $ Floor terrain items monsters
+
+genTerrain :: StdGen -> [[Tile]] -> IO [[Tile]]
+genTerrain _ _ = do
+    return emptyTerrain
+
+genItems :: StdGen -> [[Tile]] -> IO [Item]
+genItems _ _ = do
+    return []
+
+genMonsters :: StdGen -> [[Tile]] -> IO [Monster]
+genMonsters _ _ = do
+    return []
