@@ -9,17 +9,17 @@ import System.Directory
 
 import World
 import Input
-
-render_world :: World -> Picture
-render_world w = Blank
+import Render
 
 step_world :: Float -> World -> World
 step_world _ w = w
 
 main :: IO ()
 main = do
+    pwd <- getCurrentDirectory
+    images <- load_tiles pwd
     play (InWindow "Skeletons 'n Stuff" (1280, 1024) (10, 10))
-      white
+      black
       10
       (World 0 [Floor [[0, 1], [1, 0]] [] []] (Player (0, 0) 10) images)
       render_world

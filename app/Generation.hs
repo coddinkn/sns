@@ -13,6 +13,9 @@ genFloor gen = do
 
 genTerrain :: StdGen -> [[Tile]] -> IO [[Tile]]
 genTerrain _ _ = do
+    width <- randomR (4, floorWidth - )
+    height <-
+
     return emptyTerrain
 
 genItems :: StdGen -> [[Tile]] -> IO [Item]

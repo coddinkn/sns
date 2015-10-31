@@ -7,8 +7,8 @@ type Position = (Int, Int)
 type Tile = Int
 
 data Item = Money { moneyPosition :: Position, moneyAmount :: Int }
-    | Food { foodPosition :: Position, foodAmount :: Int }
-    | BoneSaw { bonePosition :: Position, sawAmount :: Int }
+          | Food { foodPosition :: Position, foodAmount :: Int }
+          | BoneSaw { bonePosition :: Position, sawAmount :: Int }
 
 data Monster = Monster { monsterPosition :: Position
                        , monsterID :: Int
@@ -28,7 +28,7 @@ data Floor = Floor { terrainLayer :: [[Tile]]
 floorWidth = 80
 floorHeight = 64
 
-emptyTerrain = take floorHeight $ repeat $ take floorWidth $ repeat (0 :: Tile) 
+emptyTerrain = take floorHeight $ repeat $ take floorWidth $ repeat ((-1) :: Tile) 
 
 data World = World { curFloor :: Int
                    , floors :: [Floor]
