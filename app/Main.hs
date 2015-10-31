@@ -18,7 +18,7 @@ main = do
     pwd <- getCurrentDirectory
     images <- load_tiles pwd
     play (InWindow "Skeletons 'n Stuff" (1280, 1024) (10, 10))
-      white
+      black
       10
       (World 0 [Floor [[0, 1], [1, 0]] [] []] (Player (0, 0) 10) images)
       render_world
