@@ -6,19 +6,15 @@ import Graphics.Gloss
 type Position = (Int, Int)
 type Tile = Int
 
-data Item = Money { moneyPosition :: Position, moneyAmount :: Int }
-          | Food { foodPosition :: Position, foodAmount :: Int }
-          | BoneSaw { bonePosition :: Position, sawAmount :: Int }
-
 data Monster = Monster { monsterPosition :: Position
                        , monsterID :: Int
                        , monsterHealth :: Int
                        , monsterVariety :: Tile
-                       , inventory :: [Item]
+                       , inventory :: [Monster]
+                       , isItem :: Bool
                        }
 
 data Floor = Floor { terrainLayer :: [[Tile]]
-                   , itemLayer :: [Item]
                    , monsterLayer :: [Monster]
                    }
 
