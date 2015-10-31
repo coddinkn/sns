@@ -18,8 +18,10 @@ load_tiles p =
   toFileName (_, b) = p ++ "/assets/" ++ b ++ ".bmp"
 
 render_world :: World -> Picture
-render_world w = if (curFloor w) >= length (floors w) then Blank else
-    render_floor ((floors w) !! (curFloor w)) (tiles w)
+render_world w = Pictures [
+    if (curFloor w) >= length (floors w) then Blank else render_floor ((floors w) !! (curFloor w)) (tiles w),
+    Color white $ Translate (-640) (-512) $ Scale 0.15 0.15 $  Text (curMessage w)
+    ]
 
 obn :: [a] -> (Int -> a -> b) -> [b]
 obn l f = obn' l f 0
@@ -34,9 +36,9 @@ obn2 l f = obn2' l f 0
   obn2' (x:xs) f n = (obn x (\m -> (\x -> f n m x))) ++ (obn2' xs f (n + 1))
 
 grid_to_x :: Int -> Float
-grid_to_x x = 16 * (fromIntegral x) - 40
+grid_to_x x = (16 * ((fromIntegral x) - ((fromIntegral floorWidth) - 1)/2))
 grid_to_y :: Int -> Float
-grid_to_y y = 16 * (fromIntegral y) - 32
+grid_to_y y = (16 * ((fromIntegral y) - ((fromIntegral floorHeight) - 1)/2)) + 8
 
 render_floor :: Floor -> (Map.Map Tile Picture) -> Picture
 render_floor f tm = Pictures $ obn2 (terrainLayer f) (\m -> \n -> \x -> maybe Blank (\t -> Translate (grid_to_x n) (grid_to_y m) t) (Map.lookup x tm))
