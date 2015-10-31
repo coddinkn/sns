@@ -34,10 +34,9 @@ obn2 l f = obn2' l f 0
   obn2' (x:xs) f n = (obn x (\m -> (\x -> f n m x))) ++ (obn2' xs f (n + 1))
 
 grid_to_x :: Int -> Float
-grid_to_x x = (((fromRational ((16 * fromIntegral x) % 1024)) * 2.0) - 1.0) * 0.5
+grid_to_x x = 16 * (fromIntegral x) - 40
 grid_to_y :: Int -> Float
-grid_to_y y = (((fromRational ((16 * fromIntegral y) % 1024)) * 2.0) - 1.0) * 0.5
-
+grid_to_y y = 16 * (fromIntegral y) - 32
 
 render_floor :: Floor -> (Map.Map Tile Picture) -> Picture
 render_floor f tm = Pictures $ obn2 (terrainLayer f) (\m -> \n -> \x -> maybe Blank (\t -> Translate (grid_to_x n) (grid_to_y m) t) (Map.lookup x tm))
