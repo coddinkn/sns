@@ -13,7 +13,7 @@ data Item = Money { moneyPosition :: Position, moneyAmount :: Int }
 data Monster = Monster { monsterPosition :: Position
                        , monsterID :: Int
                        , monsterHealth :: Int
-                       , monsterVariety :: Char
+                       , monsterVariety :: Tile
                        , inventory :: [Item]
                        }
 

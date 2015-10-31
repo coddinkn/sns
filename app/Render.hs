@@ -40,5 +40,10 @@ grid_to_x x = (16 * ((fromIntegral x) - ((fromIntegral floorWidth) - 1)/2))
 grid_to_y :: Int -> Float
 grid_to_y y = (16 * ((fromIntegral y) - ((fromIntegral floorHeight) - 1)/2)) + 8
 
+draw_tile_at :: Tile -> Map.Map Tile Picture -> Int -> Int -> Picture
+draw_tile_at t tm x y = maybe Blank (\t -> Translate (grid_to_x x) (grid_to_y y) t) (Map.lookup t tm)
+
 render_floor :: Floor -> (Map.Map Tile Picture) -> Picture
-render_floor f tm = Pictures $ obn2 (terrainLayer f) (\m -> \n -> \x -> maybe Blank (\t -> Translate (grid_to_x n) (grid_to_y m) t) (Map.lookup x tm))
+render_floor f tm = Pictures $
+  (obn2 (terrainLayer f) (\m -> \n -> \x -> draw_tile_at x tm n m))
+  ++ map (\m -> draw_tile_at (monsterVariety m) tm (fst $ monsterPosition m) (snd $ monsterPosition m)) (monsterLayer f)
